@@ -1,14 +1,24 @@
-const logArea = document.getElementById('logArea');
+// log.js (Node.js 환경에서도 작동)
+let rendererLogger = null;
+
+function setRendererLogger(fn) {
+  rendererLogger = fn; // main.js에서 넘겨줄 log 함수
+}
 
 function addLog(msg) {
-    logArea.value = logArea.value + "[INFO] - " + `${msg}\n`;
+  const formatted = `[INFO] - ${msg}`;
+  console.log(formatted);
+  if (rendererLogger) rendererLogger(formatted);
 }
 
 function addErrorLog(msg) {
-    logArea.value = logArea.value + "[ERROR] - " + `${msg}\n`;
+  const formatted = `[ERROR] - ${msg}`;
+  console.error(formatted);
+  if (rendererLogger) rendererLogger(formatted);
 }
 
 module.exports = {
-    addLog: addLog,
-    addErrorLog: addErrorLog
-}
+  addLog,
+  addErrorLog,
+  setRendererLogger
+};

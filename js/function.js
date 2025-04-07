@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const log = require('./js/log.js');
+const log = require('./log.js');
 
 async function startTicketing(consertId, numberPerson, day, userId, pw) {
     const browser = await puppeteer.launch({
@@ -155,3 +155,5 @@ async function startTicketing(consertId, numberPerson, day, userId, pw) {
 function sleep(ms) {
     return new Promise((r) => setTimeout(r, ms));
 }
+
+module.exports = startTicketing;
