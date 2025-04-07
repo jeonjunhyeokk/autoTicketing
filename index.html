@@ -70,35 +70,23 @@
       startTicketing(consertId, numberPerson, day, userId, pw);
     }
   </script>
+
+  <button onclick="saveLoginCookies()" class="btn btn-secondary">로그인 후 쿠키 저장</button>
+  <button onclick="startAutomation()" class="btn btn-primary">Let's Go</button>
+  
   <script>
     const { ipcRenderer } = require('electron');
-
+  
     function start() {
       const consertId = document.getElementById('consertId').value;
       const numberPerson = document.getElementById('numberPerson').value;
       const day = document.getElementById('day').value;
-      const userId = document.getElementById('userId').value;
-      const pw = document.getElementById('password').value;
-
-      const reserveTime = new Date();
-      reserveTime.setSeconds(reserveTime.getSeconds() + 10); // 10초 뒤 테스트
-
+  
       ipcRenderer.send('start-automation', {
         consertId,
         numberPerson,
-        day,
-        id: userId,
-        pw,
-        reserveTimeStr: reserveTime.toISOString()
+        day
       });
-
-
-      ipcRenderer.on('log-msg', (event, msg) => {
-        const logArea = document.getElementById('logArea');
-        logArea.value += msg + '\n';
-        logArea.scrollTop = logArea.scrollHeight;
-      });
-      log.value += `[INFO] 예약 요청됨: ${reserveTime.toLocaleTimeString()}\n`;
     }
   </script>
 
