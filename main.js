@@ -1,37 +1,28 @@
-const electron = require('electron')
-
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-
-const path = require('path')
-const url = require('url')
-
-let mainWindow
+// main.js
+const { app, BrowserWindow, ipcMain } = require('electron');
+const path = require('path');
+const runAutomation = require('./start-stealth.js');
 
 function createWindow() {
-    mainWindow = new BrowserWindow({width: 1200, height: 800, 
-        webPreferences: {   
-        nodeIntegration: true,
-        contextIsolation: false
-        }
-    });
+  const win = new BrowserWindow({
+    width: 600,
+    height: 500,
+    webPreferences: {
+      preload: path.join(__dirname, 'function.js'), // 여기에 ipcRenderer 있는 경우
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
+  });
 
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
-        protocol: 'file:',
-        slashes: true
-    }))
-
-    mainWindow.loadFile('index.html')
-    // mainWindow.webContents.openDevTools()
+  win.loadFile('index.html');
 }
 
 app.whenReady().then(() => {
-    createWindow();
+  createWindow();
+});
 
-    app.on('activate', () => {
-        if(mainWindow === null) {
-            createWindow()
-        }
-    })
-})
+// 👇 HTML에서 입력받은 값 처리
+ipcMain.on('start-automation', (event, formData) => {
+  console.log('[ELECTRON] 받은 값:', formData);
+  runAutomation(formData);
+});
