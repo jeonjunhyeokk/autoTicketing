@@ -20,43 +20,43 @@
   "dependencies": {
     "node-tesseract": "^0.2.7",
     "node-tesseract-ocr": "^2.2.1",
-    "puppeteer": "^19.11.1",
+    "puppeteer": "^24.6.0",
     "puppeteer-core": "^19.11.1",
     "puppeteer-in-electron": "^3.0.5",
-    "tesseract.js": "^4.0.3"
+    "tesseract.js": "^4.1.4"
   },
   "build": {
     "productName": "Auto-Ticketing",
     "appId": "net.jetalab.ex.auto_ticketing",
     "asar": true,
     "mac": {
-        "target": [
-            "default"
-        ]
+      "target": [
+        "default"
+      ]
     },
     "dmg": {
-        "title": "Auto-Ticketing"
+      "title": "Auto-Ticketing"
     },
     "win": {
-        "target": [
-            {
-                "target": "nsis",
-                "arch": [
-                    "x64",
-                    "ia32"
-                ]
-            }
-        ]
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
     },
     "nsis": {
-        "oneClick": false,
-        "allowToChangeInstallationDirectory": false,
-        "createDesktopShortcut": true
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true
     },
     "directories": {
-        "buildResources": "./resources/installer/",
-        "output": "./dist/",
-        "app": "."
+      "buildResources": "./resources/installer/",
+      "output": "./dist/",
+      "app": "."
     }
   }
 }
